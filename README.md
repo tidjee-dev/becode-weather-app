@@ -18,9 +18,9 @@ For this project, I use the following technologies:
 
 ## Usage
 
-1. Run `npm run build`
-2. Open `index.html` in your browser.
-3. Create an account on [OpenWeatherMap](https://openweathermap.org) and get your API key.
+1. Create an account on [OpenWeatherMap](https://openweathermap.org) and get your API key.
+2. Run `npm run build`
+3. Open `index.html` in your browser.
 4. Add your API key in the input field.
 5. Enter a city name and click "Search".
 6. The weather information will be displayed.
