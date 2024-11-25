@@ -1,0 +1,142 @@
+/**
+ * Reset
+ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 100%;
+}
+
+body {
+  line-height: 1.6;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #333;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  font-weight: normal;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/**
+ * Base
+ */
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #333333;
+  background-color: #f7f9fc;
+  transition: all 0.3s ease-in-out;
+  height: 100vh;
+}
+body.dark {
+  background-color: #1e1e2f;
+  color: #ecf0f1;
+}
+
+#main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 40px);
+  margin-top: auto;
+  position: relative;
+}
+
+.container {
+  width: 1200px;
+  max-width: 90%;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+#theme-switcher {
+  cursor: pointer;
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  background-color: #333333;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.99);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+}
+body.dark #theme-switcher {
+  background-color: #2196f3;
+}
+#theme-switcher .theme-icon {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+/**
+ * Footer
+ */
+#footer {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  margin-top: auto;
+  width: 100%;
+  padding: 1rem;
+  text-align: center;
+  font-size: 0.75rem;
+  height: 2.5rem;
+  color: #333333;
+}
+body.dark #footer {
+  color: #ecf0f1;
+}
+#footer .footer-link {
+  color: #2196f3;
+  text-decoration: none;
+  transition: all 0.3s ease-in-out;
+}
+#footer .footer-link:hover {
+  color: #ff9800;
+}
+@media (min-width: 992px) {
+  #footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+  }
+}
+
+/*# sourceMappingURL=styles.css.map */
