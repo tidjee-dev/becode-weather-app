@@ -5,12 +5,15 @@
 Simple weather app using OpenWeatherMap API.
 
 ## Installation
-
-`npm install`
+- Clone this repo
+  ```bash
+  git clone https://github.com/tidjee-dev/becode-weather-app-TEST
+  ```
+- Run `npm install`
 
 ## Usage
 
-1. `npm run build`
+1. Run `npm run build`
 2. Open `index.html` in your browser.
 3. Create an account on [OpenWeatherMap](https://openweathermap.org) and get your API key.
 4. Add your API key in the input field.
