@@ -22,7 +22,8 @@
   }
 
   .theme-icon {
-    width: rem(24);
-    height: rem(24);
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 }

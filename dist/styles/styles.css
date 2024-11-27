@@ -182,8 +182,9 @@ body.dark #theme-switcher {
   background-color: #2196f3;
 }
 #theme-switcher .theme-icon {
-  width: 1.5rem;
-  height: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /**
@@ -209,12 +210,6 @@ body.dark #footer {
 }
 #footer .footer-link:hover {
   color: #ff9800;
-}
-@media (min-width: 992px) {
-  #footer {
-    bottom: 0;
-    left: 0;
-  }
 }
 
 /*# sourceMappingURL=styles.css.map */

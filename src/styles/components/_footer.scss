@@ -28,10 +28,4 @@
       color: $color-secondary;
     }
   }
-
-  @include min-media-query($breakpoint-lg) {
-    // position: fixed;
-    bottom: 0;
-    left: 0;
-  }
 }
