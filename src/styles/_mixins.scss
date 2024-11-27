@@ -9,7 +9,7 @@
   gap: $gap;
 }
 
-@mixin media-query($breakpoint) {
+@mixin min-media-query($breakpoint) {
   @media (min-width: $breakpoint) {
     @content;
   }
@@ -20,13 +20,35 @@
 }
 
 @mixin glassmorphism($bg-color: $color-light,
-  $alpha: 50,
+  $alpha: 80%,
+  $shadow-x: 0,
+  $shadow-y: 0,
   $shadow-size: rem(10),
   $shadow-color: $shadow-dark,
-  $border-radius: rem(10), ) {
+  $shadow-alpha: 50%,
+  $shadow-blur: rem(10),
+  $shadow-outset: true,
+  $shadow-inset: false,
+  $border-radius: rem(10)) {
   background-color: rgba($color: $bg-color, $alpha: $alpha);
-  box-shadow: 0 $shadow-size $shadow-size $shadow-color;
-  backdrop-filter: blur(calc($shadow-size));
+
+  @if $shadow-outset && $shadow-inset {
+    box-shadow:
+      $shadow-x $shadow-y $shadow-size rgba($color: $shadow-color, $alpha: $shadow-alpha),
+      $shadow-x $shadow-y $shadow-size rgba($color: $shadow-color, $alpha: $shadow-alpha) inset;
+  }
+
+  @else if $shadow-outset {
+    box-shadow:
+      $shadow-x $shadow-y $shadow-size rgba($color: $shadow-color, $alpha: $shadow-alpha);
+  }
+
+  @else if $shadow-inset {
+    box-shadow:
+      $shadow-x $shadow-y $shadow-size rgba($color: $shadow-color, $alpha: $shadow-alpha) inset;
+  }
+
+  backdrop-filter: blur($shadow-blur);
   border-radius: $border-radius;
 }
 

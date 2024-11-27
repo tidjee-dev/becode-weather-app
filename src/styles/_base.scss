@@ -1,7 +1,6 @@
 @use "variables" as *;
 @use "functions" as *;
-@use "mixins" as *;
-@use "placeholders";
+@use "mixins";
 
 /**
  * Base
@@ -26,9 +25,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: calc(100vh - 40px);
-  margin-top: auto;
-  position: relative;
+  height: calc(100vh - rem(64*2));
 }
 
 .container {
@@ -36,5 +33,4 @@ body {
   max-width: $max-width-container;
   margin: 0 auto;
   padding: 1rem;
-  @extend %flex-column-center;
 }

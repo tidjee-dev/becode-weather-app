@@ -12,14 +12,27 @@
     <div id="theme-switcher">
       <span class="theme-icon"></span>
     </div>
+
+    <header class="header">
+      <nav class="header-nav container">
+        <h1 class="header-title">
+          The Weather App by
+          <a class="header-link" href="https://github.com/tidjee-dev" target="_blank">
+            Tidjee
+          </a>
+        </h1>
+        <div id="city-search-container">
+          <form id="city-search-form">
+            <input type="text" id="city-search-input" placeholder="Enter city name ..."
+                   list="city-list">
+            <button id="city-search-button" type="submit">Search</button>
+            <datalist class="city-search-list" id="city-list"></datalist>
+          </form>
+        </div>
+      </nav>
+    </header>
+
     <main class="container" id="main">
-      <div id="city-search-container">
-        <form id="city-search-form">
-          <input type="text" id="city-search-input" placeholder="Enter city name" list="city-list">
-          <button type="submit">Search</button>
-          <datalist id="city-list"></datalist>
-        </form>
-      </div>
 
       <div id="weather-container"></div>
 

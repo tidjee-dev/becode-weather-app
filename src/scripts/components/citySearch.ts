@@ -12,7 +12,7 @@ const citySearchForm = (): void => {
 
     if (city) {
       fetchWeatherData(city);
-      // fetchForecastData(city);
+      fetchForecastData(city);
     } else {
       alert("Please enter a city name.");
     }
@@ -26,14 +26,16 @@ const fetchWeatherData = async (city: string) => {
     const apiKey = localStorage.getItem("owmApiKey");
 
     const response = await fetch(
-      `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`
+      `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(
+        city
+      )}&appid=${apiKey}&units=metric`
     );
 
     if (!response.ok) {
       throw new Error("City not found or invalid API key.");
     }
 
-    const data = await response.json();
+    const weatherData = await response.json();
 
     const weatherContainer = document.getElementById(
       "weather-container"
@@ -41,7 +43,8 @@ const fetchWeatherData = async (city: string) => {
 
     weatherContainer.innerHTML = "";
 
-    weather(data);
+    console.log(`weatherData (city = ${weatherData.name}):`, weatherData);
+    return weatherData;
   } catch (error) {
     console.error("Error fetching weather data:", error);
     alert("Could not fetch weather data. Please try again later.");
@@ -52,15 +55,19 @@ const fetchForecastData = async (city: string) => {
   try {
     const apiKey = localStorage.getItem("owmApiKey");
 
+    console.log(`city: ${encodeURIComponent(city)}`);
+
     const response = await fetch(
-      `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`
+      `https://api.openweathermap.org/data/2.5/forecast?q=${encodeURIComponent(
+        city
+      )}&appid=${apiKey}&units=metric`
     );
 
     if (!response.ok) {
       throw new Error("City not found or invalid API key.");
     }
 
-    const data = await response.json();
+    const forecastData = await response.json();
 
     const forecastContainer = document.getElementById(
       "forecast-container"
@@ -68,7 +75,11 @@ const fetchForecastData = async (city: string) => {
 
     forecastContainer.innerHTML = "";
 
-    forecast(data);
+    console.log(
+      `forecastData (city = ${forecastData.city.name}):`,
+      forecastData
+    );
+    return forecastData;
   } catch (error) {
     console.error("Error fetching forecast data:", error);
     alert("Could not fetch forecast data. Please try again later.");
@@ -98,26 +109,9 @@ const handleCitySearchFormChange = (event: Event): void => {
 };
 
 const fetchCities = async (query: string): Promise<string[]> => {
-  // try {
-  //   const apiKey = localStorage.getItem("owmApiKey");
-
-  //   const url = `https://api.openweathermap.org/geo/1.0/direct?q=${query}&limit=10&appid=${apiKey}`;
-
-  //   const response = await fetch(url);
-
-  //   if (!response.ok) {
-  //     throw new Error("Error fetching city suggestions.");
-  //   }
-
-  //   const data = await response.json();
-  //   return data.map((location: any) => location.name);
-  // } catch (error) {
-  //   console.error("Error fetching cities:", error);
-  //   return [];
-  // }
-
   try {
-    const url = "https://countriesnow.space/api/v0.1/countries/";
+    const city = query;
+    const url = `http://api.geonames.org/searchJSON?name_startsWith=${city}&featureClass=P&maxRows=10&username=tidjee`;
 
     const response = await fetch(url, {
       method: "GET",
@@ -128,14 +122,14 @@ const fetchCities = async (query: string): Promise<string[]> => {
 
     const res = await response.json();
 
-    if (res && Array.isArray(res.data)) {
+    if (res && Array.isArray(res.geonames)) {
       const cities: string[] = [];
 
-      res.data.forEach((country: { country: string; cities: string[] }) => {
-        country.cities.forEach((city) => {
-          cities.push(`${city}, ${country.country}`);
-        });
-      });
+      res.geonames.forEach(
+        (city: { name: string; adminName1: string; countryCode: string }) => {
+          cities.push(`${city.name}, ${city.adminName1} (${city.countryCode})`);
+        }
+      );
 
       const filteredCities = cities.filter((city) =>
         city.toLowerCase().startsWith(query.toLowerCase())
@@ -150,40 +144,6 @@ const fetchCities = async (query: string): Promise<string[]> => {
     console.error("Error fetching cities:", error);
     return [];
   }
-};
-
-const weather = (data: any) => {
-  const weatherContainer = document.getElementById(
-    "weather-container"
-  ) as HTMLDivElement;
-  weatherContainer.innerHTML = `
-    <h2>Weather in ${data.name}</h2>
-    <p>${data.weather[0].description}</p>
-    <p>Temperature: ${data.main.temp}°C</p>
-  `;
-};
-
-const forecast = (data: any) => {
-  const forecastContainer = document.getElementById(
-    "forecast-container"
-  ) as HTMLDivElement;
-
-  forecastContainer.innerHTML = `
-    <h2>5-Day Forecast</h2>
-    <ul>
-      ${data.list
-        .map(
-          (forecast: any) => `
-            <li>
-              <p>${forecast.dt_txt}</p>
-              <p>${forecast.weather[0].description}</p>
-              <p>Temperature: ${forecast.main.temp}°C</p>
-            </li>
-          `
-        )
-        .join("")}
-    </ul>
-  `;
 };
 
 const main = (): void => {

@@ -41,13 +41,6 @@ img {
   max-width: 100%;
 }
 
-.container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
 /**
  * Base
  */
@@ -70,9 +63,7 @@ body.dark {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: calc(100vh - 40px);
-  margin-top: auto;
-  position: relative;
+  height: calc(100vh - 8rem);
 }
 
 .container {
@@ -82,10 +73,100 @@ body.dark {
   padding: 1rem;
 }
 
+/**
+ * Header
+ */
+.header {
+  height: 4rem;
+}
+body.dark .header {
+  color: #ecf0f1;
+}
+.header-nav {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+@media (min-width: 768px) {
+  .header-nav {
+    flex-direction: row;
+  }
+}
+.header-title {
+  font-size: 1.5rem;
+  word-wrap: break-word;
+  text-align: center;
+}
+.header-link {
+  color: #2196f3;
+  text-decoration: none;
+  transition: all 0.3s ease-in-out;
+}
+.header-link:hover {
+  color: #ff9800;
+}
+
+#city-search-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#city-search-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#city-search-input {
+  width: 90%;
+  max-width: 15.625rem;
+  margin: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  border: 1px solid #333333;
+  background-color: #ecf0f1;
+  color: #333333;
+  font-size: 1rem;
+  transition: all 0.3s ease-in-out;
+}
+#city-search-input:focus {
+  border-color: #2196f3;
+}
+#city-search-button {
+  font-weight: bold;
+  background-color: #2196f3;
+  color: #ecf0f1;
+  border: 1px solid #2196f3;
+  border-radius: 5px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+#city-search-button:hover {
+  background-color: transparent;
+  color: #2196f3;
+  border: 1px solid #2196f3;
+}
+body.dark #city-search-button {
+  background-color: #2196f3;
+  color: #ecf0f1;
+  border: 1px solid #2196f3;
+  border-radius: 5px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+body.dark #city-search-button:hover {
+  background-color: transparent;
+  color: #2196f3;
+  border: 1px solid #2196f3;
+}
+
 #theme-switcher {
   cursor: pointer;
   position: fixed;
-  top: 1rem;
+  bottom: 1rem;
   right: 1rem;
   width: 2.5rem;
   height: 2.5rem;
@@ -112,12 +193,10 @@ body.dark #theme-switcher {
   display: flex;
   justify-content: center;
   align-items: flex-end;
-  margin-top: auto;
   width: 100%;
   padding: 1rem;
-  text-align: center;
   font-size: 0.75rem;
-  height: 2.5rem;
+  height: 4rem;
   color: #333333;
 }
 body.dark #footer {
@@ -133,7 +212,6 @@ body.dark #footer {
 }
 @media (min-width: 992px) {
   #footer {
-    position: fixed;
     bottom: 0;
     left: 0;
   }

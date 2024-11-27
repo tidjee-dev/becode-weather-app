@@ -15,7 +15,7 @@ const citySearchForm = () => {
         const city = citySearchInput.value.trim();
         if (city) {
             fetchWeatherData(city);
-            // fetchForecastData(city);
+            fetchForecastData(city);
         }
         else {
             alert("Please enter a city name.");
@@ -26,14 +26,15 @@ const citySearchForm = () => {
 const fetchWeatherData = (city) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const apiKey = localStorage.getItem("owmApiKey");
-        const response = yield fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`);
+        const response = yield fetch(`https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(city)}&appid=${apiKey}&units=metric`);
         if (!response.ok) {
             throw new Error("City not found or invalid API key.");
         }
-        const data = yield response.json();
+        const weatherData = yield response.json();
         const weatherContainer = document.getElementById("weather-container");
         weatherContainer.innerHTML = "";
-        weather(data);
+        console.log(`weatherData (city = ${weatherData.name}):`, weatherData);
+        return weatherData;
     }
     catch (error) {
         console.error("Error fetching weather data:", error);
@@ -43,14 +44,16 @@ const fetchWeatherData = (city) => __awaiter(void 0, void 0, void 0, function* (
 const fetchForecastData = (city) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const apiKey = localStorage.getItem("owmApiKey");
-        const response = yield fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`);
+        console.log(`city: ${encodeURIComponent(city)}`);
+        const response = yield fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${encodeURIComponent(city)}&appid=${apiKey}&units=metric`);
         if (!response.ok) {
             throw new Error("City not found or invalid API key.");
         }
-        const data = yield response.json();
+        const forecastData = yield response.json();
         const forecastContainer = document.getElementById("forecast-container");
         forecastContainer.innerHTML = "";
-        forecast(data);
+        console.log(`forecastData (city = ${forecastData.city.name}):`, forecastData);
+        return forecastData;
     }
     catch (error) {
         console.error("Error fetching forecast data:", error);
@@ -75,21 +78,9 @@ const handleCitySearchFormChange = (event) => {
     }
 };
 const fetchCities = (query) => __awaiter(void 0, void 0, void 0, function* () {
-    // try {
-    //   const apiKey = localStorage.getItem("owmApiKey");
-    //   const url = `https://api.openweathermap.org/geo/1.0/direct?q=${query}&limit=10&appid=${apiKey}`;
-    //   const response = await fetch(url);
-    //   if (!response.ok) {
-    //     throw new Error("Error fetching city suggestions.");
-    //   }
-    //   const data = await response.json();
-    //   return data.map((location: any) => location.name);
-    // } catch (error) {
-    //   console.error("Error fetching cities:", error);
-    //   return [];
-    // }
     try {
-        const url = "https://countriesnow.space/api/v0.1/countries/";
+        const city = query;
+        const url = `http://api.geonames.org/searchJSON?name_startsWith=${city}&featureClass=P&maxRows=10&username=tidjee`;
         const response = yield fetch(url, {
             method: "GET",
         });
@@ -97,12 +88,10 @@ const fetchCities = (query) => __awaiter(void 0, void 0, void 0, function* () {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
         const res = yield response.json();
-        if (res && Array.isArray(res.data)) {
+        if (res && Array.isArray(res.geonames)) {
             const cities = [];
-            res.data.forEach((country) => {
-                country.cities.forEach((city) => {
-                    cities.push(`${city}, ${country.country}`);
-                });
+            res.geonames.forEach((city) => {
+                cities.push(`${city.name}, ${city.adminName1} (${city.countryCode})`);
             });
             const filteredCities = cities.filter((city) => city.toLowerCase().startsWith(query.toLowerCase()));
             return filteredCities.slice(0, 10);
@@ -117,31 +106,6 @@ const fetchCities = (query) => __awaiter(void 0, void 0, void 0, function* () {
         return [];
     }
 });
-const weather = (data) => {
-    const weatherContainer = document.getElementById("weather-container");
-    weatherContainer.innerHTML = `
-    <h2>Weather in ${data.name}</h2>
-    <p>${data.weather[0].description}</p>
-    <p>Temperature: ${data.main.temp}°C</p>
-  `;
-};
-const forecast = (data) => {
-    const forecastContainer = document.getElementById("forecast-container");
-    forecastContainer.innerHTML = `
-    <h2>5-Day Forecast</h2>
-    <ul>
-      ${data.list
-        .map((forecast) => `
-            <li>
-              <p>${forecast.dt_txt}</p>
-              <p>${forecast.weather[0].description}</p>
-              <p>Temperature: ${forecast.main.temp}°C</p>
-            </li>
-          `)
-        .join("")}
-    </ul>
-  `;
-};
 const main = () => {
     citySearchForm();
 };
