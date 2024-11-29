@@ -21,11 +21,25 @@ body {
 }
 
 #main {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: calc(100vh - rem(64*2));
+  margin-top: rem(64);
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(3, 1fr);
+  grid-template-areas:
+    "weather"
+    "forecast"
+    "city-comparison";
+  gap: rem(16);
+
+  @include mixins.min-media-query($breakpoint-lg) {
+    margin-top: 0;
+    height: calc(100vh - rem(64*2));
+    grid-template-columns: 1fr 2fr;
+    grid-template-rows: repeat(2, 1fr);
+    grid-template-areas:
+      "weather forecast"
+      "city-comparison city-comparison";
+  }
 }
 
 .container {

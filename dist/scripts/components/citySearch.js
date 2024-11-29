@@ -93,8 +93,8 @@ const fetchCities = (query) => __awaiter(void 0, void 0, void 0, function* () {
             res.geonames.forEach((city) => {
                 cities.push(`${city.name}, ${city.adminName1} (${city.countryCode})`);
             });
-            const filteredCities = cities.filter((city) => city.toLowerCase().startsWith(query.toLowerCase()));
-            return filteredCities.slice(0, 10);
+            console.log(res.geonames[0]);
+            return cities;
         }
         else {
             console.error("Unexpected data structure from API:", res);
@@ -106,6 +106,8 @@ const fetchCities = (query) => __awaiter(void 0, void 0, void 0, function* () {
         return [];
     }
 });
+// retreive selected option of the datalist
+const getCoordinatesFromSelectedCity = (selectedCity) => { };
 const main = () => {
     citySearchForm();
 };

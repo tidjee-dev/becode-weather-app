@@ -131,11 +131,8 @@ const fetchCities = async (query: string): Promise<string[]> => {
         }
       );
 
-      const filteredCities = cities.filter((city) =>
-        city.toLowerCase().startsWith(query.toLowerCase())
-      );
-
-      return filteredCities.slice(0, 10);
+      console.log(res.geonames[0]);
+      return cities;
     } else {
       console.error("Unexpected data structure from API:", res);
       return [];
@@ -145,6 +142,10 @@ const fetchCities = async (query: string): Promise<string[]> => {
     return [];
   }
 };
+
+// retreive selected option of the datalist
+
+const getCoordinatesFromSelectedCity = (selectedCity: string) => {};
 
 const main = (): void => {
   citySearchForm();

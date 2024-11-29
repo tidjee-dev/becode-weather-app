@@ -6,8 +6,8 @@
  * Forecast
  */
 
-#forecast-container {
-  grid-area: "forecast";
+#cities-comparison-container {
+  grid-area: "city-comparison";
   height: rem(250);
   display: flex;
   justify-content: center;
@@ -15,5 +15,6 @@
 
   @include mixins.min-media-query($breakpoint-lg) {
     height: 100%;
+    grid-column: span 2;
   }
 }

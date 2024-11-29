@@ -17,6 +17,17 @@ $color-accent: #9c27b0;
 $color-light: #ecf0f1;
 $color-dark: #333333;
 
+// Subtle colors
+$color-primary-subtle: rgba($color-primary, 80);
+$color-secondary-subtle: rgba($color-secondary, 80);
+$color-success-subtle: rgba($color-success, 80);
+$color-danger-subtle: rgba($color-danger, 80);
+$color-warning-subtle: rgba($color-warning, 80);
+$color-info-subtle: rgba($color-info, 80);
+$color-accent-subtle: rgba($color-accent, 80);
+$color-light-subtle: rgba($color-light, 80);
+$color-dark-subtle: rgba($color-dark, 80);
+
 // Background colors
 $light-bg: #f7f9fc;
 $dark-bg: #1e1e2f;

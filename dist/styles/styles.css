@@ -59,11 +59,21 @@ body.dark {
 }
 
 #main {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: calc(100vh - 8rem);
+  margin-top: 4rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(3, 1fr);
+  grid-template-areas: "weather" "forecast" "city-comparison";
+  gap: 1rem;
+}
+@media (min-width: 992px) {
+  #main {
+    margin-top: 0;
+    height: calc(100vh - 8rem);
+    grid-template-columns: 1fr 2fr;
+    grid-template-rows: repeat(2, 1fr);
+    grid-template-areas: "weather forecast" "city-comparison city-comparison";
+  }
 }
 
 .container {
@@ -185,6 +195,109 @@ body.dark #theme-switcher {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+/**
+ * Weather
+ */
+#weather-container {
+  grid-area: "weather";
+  height: 15.625rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+@media (min-width: 992px) {
+  #weather-container {
+    height: 100%;
+  }
+}
+
+/**
+ * Forecast
+ */
+#forecast-container {
+  grid-area: "forecast";
+  height: 15.625rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+@media (min-width: 992px) {
+  #forecast-container {
+    height: 100%;
+  }
+}
+
+/**
+ * Forecast
+ */
+#cities-comparison-container {
+  grid-area: "city-comparison";
+  height: 15.625rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+@media (min-width: 992px) {
+  #cities-comparison-container {
+    height: 100%;
+    grid-column: span 2;
+  }
+}
+
+#notifs-container {
+  position: absolute;
+  bottom: 3.75rem;
+  right: 1rem;
+  z-index: 9999;
+}
+#notifs-container .notif {
+  background-color: #ecf0f1;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.7);
+  animation: fade-in 0.3s ease-in;
+}
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+#notifs-container .notif.success {
+  background-color: rgba(46, 204, 113, 0.2);
+}
+#notifs-container .notif.error {
+  background-color: rgba(244, 67, 54, 0.2);
+}
+#notifs-container .notif.info {
+  background-color: rgba(0, 188, 212, 0.2);
+}
+#notifs-container .notif.warning {
+  background-color: rgba(255, 235, 59, 0.2);
+}
+#notifs-container .notif-message {
+  z-index: 9999;
+  color: #333333;
+}
+body.dark #notifs-container .notif.success {
+  background-color: rgba(46, 204, 113, 0.5);
+}
+body.dark #notifs-container .notif.error {
+  background-color: rgba(244, 67, 54, 0.5);
+}
+body.dark #notifs-container .notif.info {
+  background-color: rgba(0, 188, 212, 0.5);
+}
+body.dark #notifs-container .notif.warning {
+  background-color: rgba(255, 235, 59, 0.5);
+}
+body.dark #notifs-container .notif-message {
+  color: #ecf0f1;
 }
 
 /**

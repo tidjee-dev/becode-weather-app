@@ -1,0 +1,19 @@
+@use '../variables' as *;
+@use '../functions' as *;
+@use '../mixins';
+
+/**
+ * Weather
+ */
+
+#weather-container {
+  grid-area: "weather";
+  height: rem(250);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  @include mixins.min-media-query($breakpoint-lg) {
+    height: 100%;
+  }
+}

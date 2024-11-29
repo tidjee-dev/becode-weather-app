@@ -1,0 +1,73 @@
+@use "../variables" as *;
+@use "../functions" as *;
+
+#notifs-container {
+  position: absolute;
+  bottom: rem(60);
+  right: rem(16);
+  z-index: 9999;
+
+  .notif {
+    background-color: $color-light;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 5px rgba(black, 30);
+    animation: fade-in 0.3s ease-in;
+
+    @keyframes fade-in {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    &.success {
+      background-color: $color-success-subtle;
+    }
+
+    &.error {
+      background-color: $color-danger-subtle;
+    }
+
+    &.info {
+      background-color: $color-info-subtle;
+    }
+
+    &.warning {
+      background-color: $color-warning-subtle;
+    }
+
+    &-message {
+      z-index: 9999;
+      color: $color-dark;
+
+    }
+
+    body.dark & {
+
+      &.success {
+        background-color: rgba($color: $color-success, $alpha: 50);
+      }
+
+      &.error {
+        background-color: rgba($color: $color-danger, $alpha: 50);
+      }
+
+      &.info {
+        background-color: rgba($color: $color-info, $alpha: 50);
+      }
+
+      &.warning {
+        background-color: rgba($color: $color-warning, $alpha: 50);
+      }
+
+      &-message {
+        color: $color-light;
+      }
+    }
+  }
+}
