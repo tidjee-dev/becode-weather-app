@@ -1,4 +1,4 @@
-# becode-weather-app-TEST
+# becode-weather-app
 
 ## Description
 
