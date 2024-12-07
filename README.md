@@ -12,7 +12,7 @@ For this project, I use the following technologies:
 
 - Clone this repo
   ```bash
-  git clone https://github.com/tidjee-dev/becode-weather-app-TEST
+  git clone https://github.com/tidjee-dev/becode-weather-app
   ```
 - Run `npm install`
 
